@@ -106,7 +106,7 @@
 
 				foreach ($result as $row) {
 					$i= $row["NºProduit"];//num produit
-					$btncommande="<button  class=' blue_button' id='changer_info_$i'>changer les informations du produit</button>";
+					$btncommande="<button  class=' blue_button' id='changer_info_$i'>changer quantite du produit</button>";
 					$quantite_produit="<p>".$row["QuantiteProduit"]." article restant</p>";
 
 					echo "<li>
@@ -126,10 +126,9 @@
 							<label>Quantité du produit</label>
 							<input type='number' id='quantiteproduit_$i' name='quantiteproduit' value='".$row["QuantiteProduit"]."'>
 							<input type='hidden' name='produit_id' value='".$i."'>
-							
 						</form>
 						<button class='blue_button' id='enregistrer_$i'>Enregistrer</button>
-						<button class='red_button'>Supprimer</button>
+						<button class='red_button' id='supprimer_$i'>Supprimer</button>
 					</div>";
 					
 					echo "
@@ -151,6 +150,24 @@
 						};
 					</script>
 				";
+				echo "
+				<script>
+					var supprimer_$i= document.getElementById('supprimer_$i');
+					supprimer_$i.onclick = function() {
+						var confirm_commande = confirm('Êtes-vous sûr de vouloir supprimer le produit ?');
+						if (confirm_commande) {
+							// exécuter la requête SQL pour mettre à jour la quantité
+							var xhr = new XMLHttpRequest();
+							xhr.open('POST', 'fn_supp_pr.php');
+							xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+							xhr.onload = function() {
+								location.reload();
+							};
+							xhr.send('produit_id=$i'); 
+						}
+					};
+				</script>
+			";
 				
 					
 						
