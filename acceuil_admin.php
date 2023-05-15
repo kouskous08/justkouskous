@@ -41,8 +41,8 @@
 		if (isset($row_cmd)){
 			foreach ($result_cmd as $row_cmd){
 				$j=$row_cmd['Nºcmd'];
-				$idclient= $row_cmd['Nºclient'];
-				$n_client = "SELECT NomUtilisateur,instagram FROM $tbname_c WHERE Nºclient='$idclient' ";
+				$client= $row_cmd['Nºclient'];
+				$n_client = "SELECT NomUtilisateur,instagram FROM $tbname_c WHERE Nºclient='$client' ";
 				$result_n_cl=mysqli_query($conn, $n_client);
 				$row_n_cl = mysqli_fetch_assoc($result_n_cl);
 				$idproduit= $row_cmd['Nºproduit'];
@@ -74,7 +74,7 @@
 								xhr.onload = function() {
 									location.reload();
 								};
-							xhr.send('produit_id=$j');
+							xhr.send('cmd_id=$j');
 							}
 						};	
 					</script>
