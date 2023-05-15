@@ -1,0 +1,326 @@
+
+body{
+	margin: 0;
+    background: #0696be;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: #1A2226;
+    overflow: hidden;
+	display: flex;
+	align-items: center;
+}
+header p{
+    display: flex;
+    color:#ffffff;
+    text-align: center;
+    padding: 10px 15px;
+    text-decoration: none;
+
+}
+header a {
+    display: flex;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+	
+}
+
+header a:hover {
+    background-color: #ddd;
+    color: black;
+}
+header div{
+	align-items: center;
+	margin-left: auto;
+	order: 3;
+	 
+}
+
+header .icon{
+	width: 24px;
+	height: 24px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: inline-block;
+	margin-right: 30px;
+	padding: 5px 5px 5px 5px;
+}
+header .imgcommande{
+	background-image: url("icone/commande.png");
+	
+}
+header .imgajout{
+	background-image: url("icone/ajouter.png");
+	
+}
+header .icon:hover {
+	background-color: #ddd;
+	padding: 5px 5px 5px 5px;
+	margin-right: 30px;
+}
+header .imgcommande:hover{
+	background-image: url("icone/commandehover.png");
+}
+header .imgajout:hover{
+	background-image: url("icone/ajouterhover.png");
+}
+
+
+
+
+
+#commande-form-client  {
+	position: absolute;
+	top: 7%;
+	right: 130px;
+	width: 450px;
+	background-color: #1A2226;
+	border: 3px solid #3d3d3d;
+	padding: 10px;
+	color: #ddd;
+	z-index: 9999;
+
+}
+
+#commande-form-client div{
+	display: flex;
+	align-items: center;
+}
+#commande-form-client  .pr {
+	max-width: 20%;
+	height: auto;
+	padding-bottom: 10%;
+}
+#commande-form-client .supprimer{
+
+	right: 30px;
+	height: 60px ;
+	width: 60px ;
+}
+.commande .supprimer{
+
+	right: 30px;
+	height: 60px ;
+	width: 60px ;
+	z-index: 9999;
+
+}
+
+.commande a{
+	color: #0DB8DE;
+}
+
+
+
+
+
+
+.msg{
+	color: #fff;
+	background-color: #ff6d6d;
+	border-style: solid ;
+	border-color: #ff0000;
+	border-radius: 10px;
+	text-align: center;
+	padding: 10px 0px 20px 0px ;
+	margin: 2% 15% 2% 15%;
+}
+
+
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display:flex;
+	overflow-x: auto;
+}
+ul {
+	scrollbar-width: thin;
+	scrollbar-color: #ccc #0696be;
+}
+ul::-webkit-scrollbar {
+	width: 8px;
+}
+	
+ul::-webkit-scrollbar-track {
+	background-color: #0696be;
+}
+	
+ul::-webkit-scrollbar-thumb {
+	background-color: #666;
+	border-radius: 8px;
+}
+	
+ul::-webkit-scrollbar-thumb:hover {
+	background-color: #555;
+}
+
+h2{
+    color: #000000;
+	font-size:50px;
+	margin-left: 30px;
+}
+
+li {
+    width: 300px; 
+    height:475px;
+    box-sizing: border-box;
+    margin: 1%;
+    background-color: #1A2226;
+    transition: transform 0.3s ease-in-out;
+    color: #fff;
+    text-align: center;
+	flex-shrink: 0;
+	margin-bottom: 20px;
+
+}
+
+li:hover {
+    transform: scale(1.04);
+    box-shadow: 7px 5px 5px #00000056;
+
+    justify-content: center;
+
+}
+
+li #imgproduit{
+	max-width: 40%;
+	height: auto;
+	padding-bottom: 10%;
+}
+
+
+
+
+#nouveau-produit-form, .commander-form, .info-form {
+	width: 500px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #1A2226;
+	color: #fff;
+    z-index: 1000;
+	text-align: center;
+	position:fixed;
+  }
+
+#nouveau-produit-form form ,.info-form form {
+	display: flex;
+	flex-direction: column;
+}
+
+#nouveau-produit-form label ,.commander-form label ,.info-form label{
+	font-size: 20px;
+	margin-bottom: 5px;
+	margin-top: 10px;
+}
+
+#nouveau-produit-form input,.commander-form input ,.info-form input{
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+
+#nouveau-produit-form h3,.commander-form h3 .info-form h3{
+	text-align: center;
+	font-size: 30px;
+}
+.commander-form #imgproduit ,.info-form #imgproduit{
+	max-width: 40%;
+	height: auto;
+	padding-bottom: 10%;
+}
+.commander-form p{
+	font-size: 20px;
+}
+
+
+
+body.modal-open {
+    overflow: hidden;
+  }
+  
+.modal-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+
+
+button {
+	margin-top: 10px;
+	width: 230px;
+	height: 60px;
+	border-radius: 15px;
+	cursor: pointer;
+	color:#ffffff;
+	font-size: 19px;
+	background-color: #ff000000;
+	transition: .5s linear;
+	
+}
+
+button:hover  button:nth-child(1){
+	margin-right: 5px;
+}
+
+button:hover  button:nth-child(2){
+	margin-left: 30px;
+}
+
+
+.blue_button{
+	background-color:#0696be ;
+	border-color:#0696be;
+}
+
+.blue_button:hover{
+	background-color: #0DB8DE;
+	border-color:#0DB8DE ;
+	box-shadow: 0 0 3px #0DB8DE,
+				 0 0 6px #0DB8DE, 
+				 0 0 12px #0DB8DE;
+}
+
+
+.red_button{
+	border-color:#ff1010;
+	color:#ff1010;
+
+}
+
+.red_button:hover{
+	border-color:#ff1010 ;
+	box-shadow: 0 0 3px #ff1010,
+				 0 0 6px #ff1010, 
+				 0 0 12px #ff1010;
+}
+
+.commander-form .red_button ,.info-form .red_button{
+	background-color: #ff1010;
+	color: #fff;
+}
+
+.commander-form .red_button:hover{
+	background-color: #ff0000;
+}
+
+
+
+
+
