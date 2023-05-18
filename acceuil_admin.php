@@ -96,7 +96,11 @@
 			<input type='text' id='description-produit' name='description-produit' required>
 			<br>
 			<label for='type-produit'>type produit:</label>
-			<input type='text' id='type-produit' name='type-produit' required>
+			<select id="type-produit" name="type-produit">
+				<option value="takis">Takis</option>
+				<option value="bonbon">Bonbon</option>
+				<option value="boisson">Boisson</option>
+			</select>
 			<br>
 			<label for='image'>Image du produit :</label>
 			<input type='file' id='image' name='image' required>
