@@ -19,7 +19,7 @@
 		$tbname_p = "produit";
 		$tbname_c = "client";
 		$conn = new mysqli($hostName,$userName,$password,$dbName);
-		$x=null;
+		
 		
 
 	?>
@@ -88,7 +88,7 @@
 	</div>
 	<div id='nouveau-produit-form' style='display:none;'>
 		<h3>Ajouter un nouveau produit</h3>
-		<form action='acceuil_admin.php' method='POST' enctype='multipart/form-data'>
+		<form action='nouv_pr.php' method='POST' enctype='multipart/form-data'>
 			<label for='nom-produit'>Nom du produit :</label>
 			<input type='text' id='nom-produit' name='nom-produit' required>
 			<br>
@@ -114,21 +114,6 @@
 			<button name='enregistrer' class=' blue_button' type='submit'>Ajouter</button>
 		</form>
 	</div>
-		<?php
-			if(isset($_POST['enregistrer'])) {
-				$n_produit = $_POST['nom-produit'];
-				$des_produit = $_POST['description-produit'];
-				$tppr=$_POST['type-produit'];
-				$nom_image = $_FILES['image']['name'];
-				$chemin_image="img/$nom_image";
-				move_uploaded_file($_FILES['image']['tmp_name'], $chemin_image);
-				$pr_produit = $_POST['prix-produit'];
-				$qt_produit = $_POST['quantite-produit'];
-				$sql_add= "INSERT INTO $tbname_p (NomProduit, DescriptionProduit,TypeProduit ,ImgProduit,PrixProduit,QuantiteProduit) VALUES ('$n_produit', '$des_produit','$tppr', '$chemin_image','$pr_produit','$qt_produit')";
-				mysqli_query($conn, $sql_add);
-
-			}
-		?>
 	</div>
 
 
