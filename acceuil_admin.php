@@ -115,7 +115,7 @@
 		</form>
 	</div>
 		<?php
-			if(isset($_POST['nom-produit'])) {
+			if(isset($_POST['enregistrer'])) {
 				$n_produit = $_POST['nom-produit'];
 				$des_produit = $_POST['description-produit'];
 				$tppr=$_POST['type-produit'];
@@ -126,7 +126,7 @@
 				$qt_produit = $_POST['quantite-produit'];
 				$sql_add= "INSERT INTO $tbname_p (NomProduit, DescriptionProduit,TypeProduit ,ImgProduit,PrixProduit,QuantiteProduit) VALUES ('$n_produit', '$des_produit','$tppr', '$chemin_image','$pr_produit','$qt_produit')";
 				mysqli_query($conn, $sql_add);
-				unset($_POST);
+
 			}
 		?>
 	</div>
@@ -289,11 +289,5 @@
 		}
 	};
 </script>
-
-
-
-
-
-
 </body>
 </html>
