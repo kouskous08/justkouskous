@@ -138,11 +138,12 @@
 							$i= $row["NºProduit"];//num produit
 							$btncommande="<button  class=' blue_button' id='changer_info_$i'>changer quantite du produit</button>";
 							$quantite_produit="<p>".$row["QuantiteProduit"]." article restant</p>";
+							$img_path=$row["ImgProduit"];
 
 							echo "<li>
 							<h3>".$row["NomProduit"]."</h3>
 							<p>".$row["DescriptionProduit"]."</p>
-							<img id='imgproduit' src='".$row["ImgProduit"]."'> 
+							<img class='imgproduit' src='".$img_path."'> 
 							<p>".$row["PrixProduit"]." dh</p>
 							$btncommande
 							$quantite_produit
@@ -151,7 +152,7 @@
 							echo "
 							<div class='info-form' id='info-form-$i' style='display:none;'>
 								<h3>Information du produit</h3>
-								<img id='imgproduit' src='".$row["ImgProduit"]."'>
+								<img id='imgproduit' src='".$img_path."'>
 								<form action='acceuil_admin.php' method='POST'>
 									<label>Quantité du produit</label>
 									<input type='number' id='quantiteproduit_$i' name='quantiteproduit' value='".$row["QuantiteProduit"]."'>

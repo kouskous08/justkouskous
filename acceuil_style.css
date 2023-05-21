@@ -187,10 +187,12 @@ li:hover {
 
 }
 
-li #imgproduit{
-	max-width: 40%;
+li .imgproduit{
+	max-width: 60%;
+	min-width: 30%;
+	width: auto;
 	height: auto;
-	padding-bottom: 10%;
+	padding: 5%;
 }
 
 
