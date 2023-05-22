@@ -101,7 +101,6 @@ header .imgajout:hover{
 	width: 60px ;
 }
 .commande .supprimer{
-
 	right: 30px;
 	height: 60px ;
 	width: 60px ;
@@ -176,6 +175,8 @@ li {
     text-align: center;
 	flex-shrink: 0;
 	margin-bottom: 20px;
+	overflow: hidden;
+	position: relative;
 
 }
 
@@ -193,6 +194,15 @@ li .imgproduit{
 	width: auto;
 	height: auto;
 	padding: 5%;
+}
+li #nouv_produit{
+
+	position: absolute;
+	width: 22%;
+	height: auto;
+	top:1%;
+	left: 2%;
+
 }
 
 
@@ -236,7 +246,7 @@ li .imgproduit{
 	text-align: center;
 	font-size: 30px;
 }
-.commander-form #imgproduit ,.info-form #imgproduit{
+.commander-form .imgproduit ,.info-form .imgproduit{
 	max-width: 40%;
 	height: auto;
 	padding-bottom: 10%;
@@ -244,6 +254,10 @@ li .imgproduit{
 .commander-form p{
 	font-size: 20px;
 }
+.info-form .bouton-container {
+	display: flex;
+	justify-content: center;
+  }
 
 
 

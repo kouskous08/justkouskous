@@ -131,7 +131,7 @@
 						<h2>$typepr</h2>     
 						<ul>";
 
-						$sql = "SELECT NºProduit,NomProduit, PrixProduit, DescriptionProduit,ImgProduit,QuantiteProduit FROM $tbname_p WHERE TypeProduit ='$typepr'";
+						$sql = "SELECT NºProduit,NomProduit, PrixProduit, DescriptionProduit,ImgProduit,QuantiteProduit,date FROM $tbname_p WHERE TypeProduit ='$typepr'";
 						$result =mysqli_query($conn, $sql);
 
 						foreach ($result as $row) {
@@ -139,48 +139,63 @@
 							$btncommande="<button  class=' blue_button' id='changer_info_$i'>changer quantite du produit</button>";
 							$quantite_produit="<p>".$row["QuantiteProduit"]." article restant</p>";
 							$img_path=$row["ImgProduit"];
-
-							echo "<li>
-							<h3>".$row["NomProduit"]."</h3>
-							<p>".$row["DescriptionProduit"]."</p>
-							<img class='imgproduit' src='".$img_path."'> 
-							<p>".$row["PrixProduit"]." dh</p>
-							$btncommande
-							$quantite_produit
-							</li>";
+							
+							$date_pr=$row["date"];
+							$date_pr=new DateTime($date_pr);//le jour lorsque le produit a ete ajouter
+							$date_pr_3j=$date_pr->add(new DateInterval('P3D'));//j ai ajouter 3 jrs
+							$date_pr_3j=$date_pr_3j->format('Y-m-d H:i:s');
+							
+							$date = new DateTime();//aujourdui
+							$newTimezone = new DateTimeZone('Africa/Casablanca');
+							$date->setTimezone($newTimezone);
+							$date=$date->format('Y-m-d H:i:s');
+							
+							if($date_pr_3j>$date){//pour que le produit soit nouveau sa date +3jrs doit etre superieur a aujourd'hui
+								echo "<li>
+								<img id='nouv_produit' src='icone/nouv.png'>
+								<h3>".$row["NomProduit"]."</h3>
+								<p>".$row["DescriptionProduit"]."</p>
+								<img class='imgproduit' src='".$img_path."'> 
+								<p>".$row["PrixProduit"]." dh</p>
+								$btncommande
+								$quantite_produit
+								</li>";	
+							}else{
+								echo "<li>
+								<h3>".$row["NomProduit"]."</h3>
+								<p>".$row["DescriptionProduit"]."</p>
+								<img class='imgproduit' src='".$img_path."'> 
+								<p>".$row["PrixProduit"]." dh</p>
+								$btncommande
+								$quantite_produit
+								</li>";
+							}
 
 							echo "
 							<div class='info-form' id='info-form-$i' style='display:none;'>
 								<h3>Information du produit</h3>
-								<img id='imgproduit' src='".$img_path."'>
-								<form action='acceuil_admin.php' method='POST'>
-									<label>Quantité du produit</label>
-									<input type='number' id='quantiteproduit_$i' name='quantiteproduit' value='".$row["QuantiteProduit"]."'>
-									<input type='hidden' name='produit_id' value='".$i."'>
+								<img class='imgproduit' src='".$img_path."'>
+								<form action='info_pr.php' method='POST' >
+								<input type='hidden' name='i' value='$i'>
+									<label for='nom-produit'>Nom du produit :</label>
+									<input type='text' id='nom-produit' name='nom-produit'  placeholder='".$row['NomProduit']."' ='".$row['NomProduit']."' >
+									<br>
+									<label for='description-produit'>Description :</label>
+									<input type='text' id='description-produit' name='description-produit'  placeholder='".$row['DescriptionProduit']."' >
+									<br>
+									<label for='prix-produit'>Prix :</label>
+									<input type='number' id='prix-produit' name='prix-produit'  placeholder='".$row['PrixProduit']."' >
+									<br>
+									<label for='quantite-produit'>quantité produit :</label>
+									<input type='number' id='quantite-produit' name='quantite-produit'  placeholder='".$row['QuantiteProduit']."' >
+									<br>
+									<div class='bouton-container'>
+									<button name='enregistrer' class='blue_button' id='enregistrer_$i' type='submit'>Enregistrer</button>
+									<button class='red_button' id='supprimer_$i'>Supprimer</button>
+								  </div>
 								</form>
-								<button class='blue_button' id='enregistrer_$i'>Enregistrer</button>
-								<button class='red_button' id='supprimer_$i'>Supprimer</button>
-							</div>";
-							
-							echo "
-							<script>
-								var enregistrer_$i = document.getElementById('enregistrer_$i');
-								enregistrer_$i.onclick = function() {
-									var confirm_commande = confirm('Êtes-vous sûr de vouloir changer la quantité du produit ?');
-									if (confirm_commande) {
-										// exécuter la requête SQL pour mettre à jour la quantité
-										var xhr = new XMLHttpRequest();
-										xhr.open('POST', 'fn_enr.php');
-										xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-										xhr.onload = function() {
-											location.reload();
-										};
-										var quantite_pr = document.getElementById('quantiteproduit_$i').value; 
-										xhr.send('produit_id=$i&quantite_pr=' + encodeURIComponent(quantite_pr)); 
-									}
-								};
-							</script>
-						";
+
+							</div>"; 
 						echo "
 						<script>
 							var supprimer_$i= document.getElementById('supprimer_$i');

@@ -49,7 +49,7 @@
 			echo "<p>vous n'avez aucune commande pour le moment</p>";
 		}else{
 
-			echo "<p>les produit commandé sont:</p>";
+			echo "<p>les produits commandé sont:</p>";
 
 			$Cmd= "SELECT Nºproduit FROM cmd WHere Nºclient='$Nºclient' ";
 			
@@ -126,7 +126,7 @@
 			
 				
 
-				$sql = "SELECT NºProduit,NomProduit, PrixProduit, DescriptionProduit,ImgProduit,QuantiteProduit FROM $tbname_p WHERE TypeProduit ='$typepr'";
+				$sql = "SELECT NºProduit,NomProduit, PrixProduit, DescriptionProduit,ImgProduit,QuantiteProduit,date FROM $tbname_p WHERE TypeProduit ='$typepr'";
 				$result =mysqli_query($conn, $sql);
 
 				foreach ($result as $row) {
@@ -146,14 +146,36 @@
 					};
 					
 					
-					echo "<li>
-					<h3>".$row["NomProduit"]."</h3>
-					<p>".$row["DescriptionProduit"]."</p>
-					<img id='imgproduit' src='".$row["ImgProduit"]."'> 
-					<p>".$row["PrixProduit"]." dh</p>
-					$btncommande
-					$quantite_produit
-					</li>";
+					$date_pr=$row["date"];
+					$date_pr=new DateTime($date_pr);//le jour lorsque le produit a ete ajouter
+					$date_pr_3j=$date_pr->add(new DateInterval('P3D'));//j ai ajouter 3 jrs
+					$date_pr_3j=$date_pr_3j->format('Y-m-d H:i:s');
+					
+					$date = new DateTime();//aujourdui
+					$newTimezone = new DateTimeZone('Africa/Casablanca');
+					$date->setTimezone($newTimezone);
+					$date=$date->format('Y-m-d H:i:s');
+					
+					if($date_pr_3j>$date){//pour que le produit soit nouveau sa date +3jrs doit etre superieur a aujourd'hui
+						echo "<li>
+						<img id='nouv_produit' src='icone/nouv.png'>
+						<h3>".$row["NomProduit"]."</h3>
+						<p>".$row["DescriptionProduit"]."</p>
+						<img class='imgproduit' src='".$row["ImgProduit"]."'> 
+						<p>".$row["PrixProduit"]." dh</p>
+						$btncommande
+						$quantite_produit
+						</li>";	
+					}else{
+						echo "<li>
+						<h3>".$row["NomProduit"]."</h3>
+						<p>".$row["DescriptionProduit"]."</p>
+						<img class='imgproduit' src='".$row["ImgProduit"]."'> 
+						<p>".$row["PrixProduit"]." dh</p>
+						$btncommande
+						$quantite_produit
+						</li>";
+					}
 				
 		
 
@@ -171,7 +193,7 @@
 							echo "
 							<div class=commander-form id=commander-form-$i style='display:none;' >
 								<h3>commande</h3>
-								<img id='imgproduit' src='".$row["ImgProduit"]."'>
+								<img class='imgproduit' src='".$row["ImgProduit"]."'>
 								<p>votre produit est ".$row["NomProduit"]." à ".$row["PrixProduit"]." dh</p>
 								<p>nous allons vous contacter dans instagram avec cet utilisateur: $a</p>	
 								<button class='blue_button' id='btn_oui_$i' >oui</button>
