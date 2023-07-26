@@ -45,7 +45,7 @@
 							
 							if($username==="kouskous_ferkous"){
 							
-								if($user_password=="123456789"){
+								if($user_password=="mamak2008"){
 
 									$_SESSION['user'] = $username;
 									header('Location: acceuil_admin.php');
@@ -76,7 +76,7 @@
 			<button>se connecter</button>
 		</form>
 
-		<p>vous n'avez pas de compte  <a href="register.php">inscrivez-vous</a></p>
+		<p>vous n'avez pas de compte  <a href="index.php">inscrivez-vous</a></p>
 	</div>
 </body>
 </html>

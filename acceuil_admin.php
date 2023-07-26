@@ -12,6 +12,7 @@
 <body>
 	<?php
 		session_start();
+
 		$hostName = "localhost";
 		$userName = "root";
 		$password = "";
@@ -20,15 +21,19 @@
 		$tbname_c = "client";
 		$conn = new mysqli($hostName,$userName,$password,$dbName);
 		
+        if($_SESSION['user']!="kouskous_ferkous"){
+			header('Location: index.php');
+		}
+        
 		
 
 	?>
 
 <header>
 	<p>nos produit:</p>
-	<a href = "#takis" >takis</a>
-	<a href = "#bonbon" >bonbon</a>
-	<a href = "#boisson" >boisson</a>
+	<a href = "#takis" class="lien-glissant" >takis</a>
+	<a href = "#bonbon" class="lien-glissant" >bonbon</a>
+	<a href = "#boisson" class="lien-glissant" >boisson</a>
 	<div  id='icone'>
 		<span class ="icon imgcommande" id ="btn-commande" ></span>
 		<span class ="icon imgajout" id ="btn-ajout" ></span>
@@ -41,13 +46,13 @@
 			$row_cmd= mysqli_fetch_assoc($result_cmd);
 			if (isset($row_cmd)){
 				foreach ($result_cmd as $row_cmd){
-					$j=$row_cmd['Nºcmd'];
-					$client= $row_cmd['Nºclient'];
-					$n_client = "SELECT NomUtilisateur,instagram FROM $tbname_c WHERE Nºclient='$client' ";
+					$j=$row_cmd['Ncmd'];
+					$client= $row_cmd['Nclient'];
+					$n_client = "SELECT NomUtilisateur,instagram FROM $tbname_c WHERE Nclient='$client' ";
 					$result_n_cl=mysqli_query($conn, $n_client);
 					$row_n_cl = mysqli_fetch_assoc($result_n_cl);
-					$idproduit= $row_cmd['Nºproduit'];
-					$n_produit = "SELECT NomProduit,ImgProduit,PrixProduit FROM $tbname_p WHERE Nºproduit='$idproduit' ";
+					$idproduit= $row_cmd['Nproduit'];
+					$n_produit = "SELECT NomProduit,ImgProduit,PrixProduit FROM $tbname_p WHERE Nproduit='$idproduit' ";
 					$result_n_pr=mysqli_query($conn, $n_produit);
 					$row_n_pr = mysqli_fetch_assoc($result_n_pr);
 
@@ -131,12 +136,12 @@
 						<h2>$typepr</h2>     
 						<ul>";
 
-						$sql = "SELECT NºProduit,NomProduit, PrixProduit, DescriptionProduit,ImgProduit,QuantiteProduit,date FROM $tbname_p WHERE TypeProduit ='$typepr'";
+						$sql = "SELECT NProduit,NomProduit, PrixProduit, DescriptionProduit,ImgProduit,QuantiteProduit,date FROM $tbname_p WHERE TypeProduit ='$typepr'";
 						$result =mysqli_query($conn, $sql);
 
 						foreach ($result as $row) {
-							$i= $row["NºProduit"];//num produit
-							$btncommande="<button  class=' blue_button' id='changer_info_$i'>changer quantite du produit</button>";
+							$i= $row["NProduit"];//num produit
+							$infopr="<button  class=' blue_button' id='changer_info_$i'>changer info du produit</button>";
 							$quantite_produit="<p>".$row["QuantiteProduit"]." article restant</p>";
 							$img_path=$row["ImgProduit"];
 							
@@ -157,7 +162,7 @@
 								<p>".$row["DescriptionProduit"]."</p>
 								<img class='imgproduit' src='".$img_path."'> 
 								<p>".$row["PrixProduit"]." dh</p>
-								$btncommande
+								$infopr
 								$quantite_produit
 								</li>";	
 							}else{
@@ -166,7 +171,7 @@
 								<p>".$row["DescriptionProduit"]."</p>
 								<img class='imgproduit' src='".$img_path."'> 
 								<p>".$row["PrixProduit"]." dh</p>
-								$btncommande
+								$infopr
 								$quantite_produit
 								</li>";
 							}

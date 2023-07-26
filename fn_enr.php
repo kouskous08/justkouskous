@@ -1,4 +1,5 @@
 <?php
+header('Location: index.php');
 include 'acceuil_admin.php';
 
 // Vérifier que les données POST sont présentes
@@ -9,7 +10,7 @@ if(isset($_POST['quantite_pr']) && isset($_POST['produit_id'])) {
     $produit_id = $_POST['produit_id'];
     
     // Mettre à jour la quantité du produit dans la base de données
-    $sql = "UPDATE $tbname_p SET QuantiteProduit = '$quantite' WHERE `Nºproduit` = $produit_id";
+    $sql = "UPDATE $tbname_p SET QuantiteProduit = '$quantite' WHERE `Nproduit` = $produit_id";
     $result = mysqli_query($conn, $sql);
     
     // Vérifier si la mise à jour a réussi

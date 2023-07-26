@@ -19,6 +19,12 @@
 		$tbname_p = "produit";
 		$tbname_c = "client";
 		$conn = new mysqli($hostName,$userName,$password,$dbName);
+        if($_SESSION['user']==null){
+			header('Location: index.php');
+		}elseif($_SESSION['user']=='kouskous_ferkous'){
+           header('Location: acceuil_admin.php'); 
+        }
+	
 		
 
 		
@@ -26,9 +32,9 @@
 
   	<header>
 		<p>nos produit:</p>
-		<a href = "#takis" >takis</a>
-		<a href = "#bonbon" >bonbon</a>
-		<a href = "#boisson" >boisson</a>
+		<a href = "#takis" class="lien-glissant" >takis</a>
+		<a href = "#bonbon" class="lien-glissant" >bonbon</a>
+		<a href = "#boisson" class="lien-glissant" >boisson</a>
 		<button id='btn-contacter-nous' class='blue_button '>contacter-nous</button>
 		<div id='icone' >
 			<span class ="icon imgcommande" id ="btn-commande-client" ></span>
@@ -36,11 +42,11 @@
 	</header>
 	<?php 
 			$user=$_SESSION['user'];
-			$N_U = "SELECT Nºclient FROM $tbname_c WHERE NomUtilisateur = '$user'";
+			$N_U = "SELECT Nclient FROM $tbname_c WHERE NomUtilisateur = '$user'";
 			$result_u = mysqli_query($conn, $N_U);
 			$row_u = mysqli_fetch_assoc($result_u);
-			$Nºclient = $row_u['Nºclient'];
-			$N_cl = "SELECT Nºclient FROM cmd WHERE Nºclient = '$Nºclient'";
+			$Nclient = $row_u['Nclient'];
+			$N_cl = "SELECT Nclient FROM cmd WHERE Nclient = '$Nclient'";
 			$result_cl = mysqli_query($conn, $N_cl);
 			$num_rows_cl=mysqli_num_rows($result_cl);	
 	?>
@@ -63,52 +69,55 @@
 
 			echo "<p>les produits commandé sont:</p>";
 
-			$Cmd= "SELECT Nºproduit FROM cmd WHere Nºclient='$Nºclient' ";
+			$Cmd= "SELECT Ncmd,Nproduit FROM cmd WHere Nclient='$Nclient' ";
 			
 			$result_cmd=mysqli_query($conn, $Cmd);
 			
 
 			
-			foreach ($result_cmd as $produit_cmd){
-				foreach($produit_cmd as $produit_cmd){
-					$sql_pr="SELECT Nºproduit,NomProduit,DescriptionProduit,ImgProduit,PrixProduit FROM $tbname_p WHERE Nºproduit='$produit_cmd' ";
-					$result_pr= mysqli_query($conn, $sql_pr);
-					
-					$numrow_pr=mysqli_num_rows($result_pr);
+			while ($produit_cmd = mysqli_fetch_assoc($result_cmd)) {
+				$Nproduit = $produit_cmd['Nproduit'];
+				$Ncmd = $produit_cmd['Ncmd'];
+			
+				$sql_pr = "SELECT Nproduit, NomProduit, DescriptionProduit, ImgProduit, PrixProduit FROM $tbname_p WHERE Nproduit='$Nproduit'";
+				$result_pr = mysqli_query($conn, $sql_pr);
+			
 
-					foreach ($result_pr as $info_pr ){
-						$i= $info_pr['Nºproduit'];
-						echo "
-						<div>	
-						<img class= 'pr' src=".$info_pr["ImgProduit"].">
-						<h3>1X &nbsp;</h3>
-						<p>  ".$info_pr["NomProduit"]." 
-						à prix de ".$info_pr["PrixProduit"]."dh </p>
-						<img class='supprimer' id=supprimer_$i src='icone/supprimer.png'>
-						</div>
-						";
-						
-						echo"
-						<script>
-							var supprimer_$i = document.getElementById('supprimer_$i');
-							supprimer_$i.onclick = function() {
-								var confirm_supp = confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');
-								if (confirm_supp) {
-									var xhr = new XMLHttpRequest();
-									xhr.open('POST', 'fn_supp.php');
-									xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-									xhr.onload = function() {
-										location.reload();
-									};
-								xhr.send('produit_id=$i');
-								}
-							};	
-						</script>
-						";	
-						}
-					}
+			
+				while ($info_pr = mysqli_fetch_assoc($result_pr)) {
+					$i = $info_pr['Nproduit'];
+					$j = $Ncmd;
+					echo "
+					<div>	
+					<img class='pr' src=" . $info_pr['ImgProduit'] . ">
+					<h3>1X &nbsp;</h3>
+					<p>" . $info_pr['NomProduit'] . " 
+					à prix de " . $info_pr['PrixProduit'] . "dh </p>
+					<img class='supprimer' id='supprimer_$i' src='icone/supprimer.png'>
+					</div>
+					";
+			
+					echo "
+					<script>
+						var supprimer_$i = document.getElementById('supprimer_$i');
+						supprimer_$i.onclick = function() {
+							var confirm_supp = confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');
+							if (confirm_supp) {
+								var xhr = new XMLHttpRequest();
+								xhr.open('POST', 'fn_supp.php');
+								xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+								xhr.onload = function() {
+									location.reload();
+								};
+								xhr.send('cmd_id=$j');
+							}
+						};	
+					</script>
+					";
 				}
 			}
+			
+		}
 
 	?>
 	</div>
@@ -138,11 +147,11 @@
 			
 				
 
-				$sql = "SELECT NºProduit,NomProduit, PrixProduit, DescriptionProduit,ImgProduit,QuantiteProduit,date FROM $tbname_p WHERE TypeProduit ='$typepr'";
+				$sql = "SELECT NProduit,NomProduit, PrixProduit, DescriptionProduit,ImgProduit,QuantiteProduit,date FROM $tbname_p WHERE TypeProduit ='$typepr'";
 				$result =mysqli_query($conn, $sql);
-
+				
 				foreach ($result as $row) {
-					$i= $row["NºProduit"];//num produit
+					$i= $row["NProduit"];//num produit
 					
 					if($num_rows_cl>=2){
 						$btncommande="<button  class=' red_button' id='limit'>vous avez atteint la limite de commande</button>";

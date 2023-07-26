@@ -25,7 +25,7 @@
 		
 	?>
 		<h1>Inscription</h1>
-		<form action="register.php" id="register-container" method="POST">
+		<form action="index.php" id="register-container" method="POST">
 			<label for="username">Nom d'utilisateur:</label>
 			<input type="text" name="username" id="username" placeholder="Nom d'utilisateur" required>
 			<label for="insta">Ton Instagram:</label>

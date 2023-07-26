@@ -358,6 +358,70 @@ button:hover  button:nth-child(2){
 .commander-form .red_button:hover{
 	background-color: #ff0000;
 }
+@media (max-width: 768px) {
+	header #btn-contacter-nous {
+		width: 150px;
+		height: 50px;
+		border-radius: 10px;
+		margin-left: 5%;
+		margin-top: 5px;
+		font-size: 16px;
+		background-color: #0DB8DE;
+		color: #ffffff;
+		cursor: pointer;
+		transition: 0.5s linear;
+		order: 3;
+		right: initial;
+		margin-right: initial;
+	}
+	#commande-form-client  {
+		position: absolute;
+		top: 7%;
+		right: 100px;
+		width: 400px;
+		background-color: #1A2226;
+		border: 3px solid #3d3d3d;
+		padding: 10px;
+		color: #ddd;
+		z-index: 9999;
+	
+	}
+	#nouveau-produit-form form ,.info-form form {
+		display: flex;
+		flex-direction: column;
+		
+	}
+	button{
+		margin-top: 10px;
+		width: 200px;
+		height: 50px;
+	}
+	li {
+		width: 270px; 
+		height:440px;
+	}
+	li:hover {
+		transform: scale(1.02);
+		box-shadow: 6px 4px 4px #00000056;
+	}
+	li .imgproduit{
+		max-width: 60%;
+		min-width: 30%;
+		width: auto;
+		height: auto;
+		padding: 5%;
+	}
+	#nouveau-produit-form, .commander-form, .info-form,#contacter-nous {
+		width: 450px;
+	}
+	#nouveau-produit-form input,.commander-form input ,.info-form input{
+		padding: 8px;
+		margin-bottom: 8px;
+		border-radius: 4px;
+		border: 1px solid #ccc;
+	}
+}
+
 
 
 
