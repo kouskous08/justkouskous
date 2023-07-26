@@ -33,7 +33,27 @@ header a:hover {
     background-color: #ddd;
     color: black;
 }
-header div{
+
+header #btn-contacter-nous{
+	margin-left: 25%;
+	margin-top: 10px;
+	width: 200px;
+	height: 40px;
+	border-radius: 15px;
+	cursor: pointer;
+	color:#ffffff;
+	font-size: 19px;
+	background-color: #0DB8DE;
+	transition: .5s linear;
+	right: 70px;
+	margin-left: auto;
+	order: 3;
+	margin-right:-30% ;
+
+	
+}
+
+header #icone{
 	align-items: center;
 	margin-left: auto;
 	order: 3;
@@ -208,7 +228,7 @@ li #nouv_produit{
 
 
 
-#nouveau-produit-form, .commander-form, .info-form {
+#nouveau-produit-form, .commander-form, .info-form,#contacter-nous {
 	width: 500px;
 	position: absolute;
 	top: 50%;
@@ -242,7 +262,7 @@ li #nouv_produit{
 }
 
 
-#nouveau-produit-form h3,.commander-form h3 .info-form h3{
+#nouveau-produit-form h3,.commander-form h3 .info-form h3,#contacter-nous h3 {
 	text-align: center;
 	font-size: 30px;
 }
@@ -258,6 +278,10 @@ li #nouv_produit{
 	display: flex;
 	justify-content: center;
   }
+
+#contacter-nous a{
+	color: #0DB8DE;
+}
 
 
 

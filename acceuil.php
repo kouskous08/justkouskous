@@ -25,13 +25,14 @@
 	?>
 
   	<header>
-	<p>nos produit:</p>
-	<a href = "#takis" >takis</a>
-	<a href = "#bonbon" >bonbon</a>
-	<a href = "#boisson" >boisson</a>
-	<div >
-		<span class ="icon imgcommande" id ="btn-commande-client" ></span>
-	</div>
+		<p>nos produit:</p>
+		<a href = "#takis" >takis</a>
+		<a href = "#bonbon" >bonbon</a>
+		<a href = "#boisson" >boisson</a>
+		<button id='btn-contacter-nous' class='blue_button '>contacter-nous</button>
+		<div id='icone' >
+			<span class ="icon imgcommande" id ="btn-commande-client" ></span>
+		</div>
 	</header>
 	<?php 
 			$user=$_SESSION['user'];
@@ -43,6 +44,17 @@
 			$result_cl = mysqli_query($conn, $N_cl);
 			$num_rows_cl=mysqli_num_rows($result_cl);	
 	?>
+	<div id='contacter-nous'  style='display:none;'>
+		<h3>contacter nous</h3>
+		<p>si vous avez des problème ou vous voulez nous aider à s'améliorer 
+		<br> vous pouvez nous contacter  dans notre instagram </p>
+		<a href="https://www.instagram.com/just_kouskous/"><button id='btn-contacter-nous' class='blue_button '>contacter-nous</button></a>
+	</div>
+	
+	
+	
+	
+	
 	<div id = "commande-form-client" style='display:none;'>
 	<?php
 		if($num_rows_cl==0){
@@ -285,6 +297,26 @@
 			body.appendChild(mask);
 			mask.onclick = function(){
 				cmd_form_cl.style.display = 'none';
+				body.classList.remove('modal-open');
+				body.removeChild(mask);	
+			}
+		}
+	};
+</script>
+
+<script>
+		var body = document.querySelector('body');
+		var mask = document.createElement('div');
+		mask.classList.add('modal-mask');
+		var btn_contacter_nous = document.getElementById('btn-contacter-nous');
+		var contacter_nous = document.getElementById('contacter-nous');//3ad khesek d kemel 3liha
+		btn_contacter_nous.onclick = function() {
+		if (contacter_nous.style.display === 'none') {
+			contacter_nous.style.display = 'block';
+			body.classList.add('modal-open');
+			body.appendChild(mask);
+			mask.onclick = function(){
+				contacter_nous.style.display = 'none';
 				body.classList.remove('modal-open');
 				body.removeChild(mask);	
 			}

@@ -29,7 +29,7 @@
 	<a href = "#takis" >takis</a>
 	<a href = "#bonbon" >bonbon</a>
 	<a href = "#boisson" >boisson</a>
-	<div >
+	<div  id='icone'>
 		<span class ="icon imgcommande" id ="btn-commande" ></span>
 		<span class ="icon imgajout" id ="btn-ajout" ></span>
 	</div>

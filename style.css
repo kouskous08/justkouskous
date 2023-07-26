@@ -1,10 +1,9 @@
-
-
-body{
+body {
 	background: #0696be;
 	font-family: Arial, Helvetica, sans-serif;
 }
-.container{
+
+.container {
 	width: 500px;
 	position: absolute;
 	top: 50%;
@@ -14,7 +13,6 @@ body{
 	border-radius: 10px;
 	background-color: #1A2226;
 	color: #fff;
-
 }
 
 .container h1 {
@@ -23,17 +21,18 @@ body{
 	color: #0696be;
 }
 
-.container form{
+.container form {
 	display: flex;
 	flex-direction: column;
 }
 
-.erreur{
+.erreur {
 	text-align: center;
 	font-size: small;
 	color: rgb(255, 54, 54);
 }
-.container label{
+
+.container label {
 	font-size: 20px;
 	margin-bottom: 5px;
 	margin-top: 10px;
@@ -52,8 +51,8 @@ body{
 	height: 60px;
 	border-radius: 15px;
 	cursor: pointer;
-	border-color:#0696be;
-	color:#ffffff;
+	border-color: #0696be;
+	color: #ffffff;
 	margin-left: 25%;
 	margin-right: 25%;
 	font-size: 19px;
@@ -61,23 +60,13 @@ body{
 	transition: .5s linear;
 }
 
-
-.container button:hover .container button:nth-child(1){
-	margin-right: 5px;
-}
-
-.container button:hover .container button:nth-child(2){
-	margin-left: 30px;
-}
-
-.container button:hover{
-	border-color:#0DB8DE ;
+.container button:hover {
+	border-color: #0DB8DE;
 	background-color: #0DB8DE;
 	box-shadow: 0 0 3px #0DB8DE,
-				 0 0 6px #0DB8DE, 
-				 0 0 12px #0DB8DE;
+				0 0 6px #0DB8DE, 
+				0 0 12px #0DB8DE;
 }
-
 
 .container p {
 	text-align: center;
@@ -91,4 +80,18 @@ body{
 
 .container a:hover {
 	text-decoration: underline;
+}
+
+/* Styles pour les écrans de petite taille */
+@media (max-width: 768px) {
+	.container {
+		width: 90%;
+		margin: 0 auto;
+	}
+	
+	.container button {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+	}
 }
